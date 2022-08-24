@@ -209,7 +209,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5584642962779060996}
   - component: {fileID: 1240266586454936700}
-  - component: {fileID: 8596051083608537528}
+  - component: {fileID: 29512250004961125}
   m_Layer: 0
   m_Name: Actions
   m_TagString: Untagged
@@ -262,7 +262,7 @@ MonoBehaviour:
   m_DefaultActionMap: Gameplay
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
---- !u!114 &8596051083608537528
+--- !u!114 &29512250004961125
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -276,6 +276,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _moveInput: {fileID: -8532404176583685949, guid: 6a6bc8352600e864e9ea584afce92924, type: 3}
   _jumpInput: {fileID: -6870501236802695105, guid: 6a6bc8352600e864e9ea584afce92924, type: 3}
+  _root: {fileID: 5625947682522146059}
+  _speed: 7
 --- !u!1 &3665337397066442047
 GameObject:
   m_ObjectHideFlags: 0
