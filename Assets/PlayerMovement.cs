@@ -10,6 +10,9 @@ public class PlayerMovement : MonoBehaviour
 
     [SerializeField] Transform _root;
     [SerializeField] float _speed;
+    [SerializeField] float _movingThreshold;
+
+    [SerializeField] Animator _animator;
 
     Vector2 _playerMovement;
 
@@ -18,6 +21,7 @@ public class PlayerMovement : MonoBehaviour
     {
         _root = transform.parent;
         _speed = 2f;
+        _movingThreshold = 0.1f;
         Debug.Log("COUCOU L'EDITEUR");
     }
 #endif
@@ -33,8 +37,24 @@ public class PlayerMovement : MonoBehaviour
     {
         Debug.Log(_playerMovement);
 
+        // Movement
         Vector2 direction = new Vector2(_playerMovement.x, 0);
        _root.transform.Translate(direction * Time.fixedDeltaTime * _speed);
+
+        // Animator
+        Debug.Log($"Magnitude : {direction.magnitude}");
+
+
+        if(direction.magnitude > _movingThreshold)        // Si on est en train de bouger
+        {
+            _animator.SetBool("IsWalking", true);
+        }
+        else       // Sinon c'est que l'on ne bouge pas donc false
+        {
+            _animator.SetBool("IsWalking", false);
+        }
+
+
     }
 
 
