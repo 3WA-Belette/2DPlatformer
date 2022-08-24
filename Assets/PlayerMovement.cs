@@ -43,8 +43,6 @@ public class PlayerMovement : MonoBehaviour
 
         // Animator
         Debug.Log($"Magnitude : {direction.magnitude}");
-
-
         if(direction.magnitude > _movingThreshold)        // Si on est en train de bouger
         {
             _animator.SetBool("IsWalking", true);
@@ -54,9 +52,17 @@ public class PlayerMovement : MonoBehaviour
             _animator.SetBool("IsWalking", false);
         }
 
+        // Orientation
+        if(direction.x > 0)     // Right
+        {
+            _root.localScale = new Vector3(1, 1, 1);
+        }
+        else if(direction.x < 0)              // Left
+        {
+            _root.localScale = new Vector3(-1, 1, 1);
+        }
 
     }
-
 
     void StartMove(InputAction.CallbackContext obj)
     {
