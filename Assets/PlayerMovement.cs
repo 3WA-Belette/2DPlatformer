@@ -35,11 +35,9 @@ public class PlayerMovement : MonoBehaviour
     }
     void FixedUpdate()
     {
-        Debug.Log(_playerMovement);
-
         // Movement
         Vector2 direction = new Vector2(_playerMovement.x, 0);
-       _root.transform.Translate(direction * Time.fixedDeltaTime * _speed);
+       _root.transform.Translate(direction * Time.fixedDeltaTime * _speed, Space.World);
 
         // Animator
         Debug.Log($"Magnitude : {direction.magnitude}");
@@ -55,11 +53,11 @@ public class PlayerMovement : MonoBehaviour
         // Orientation
         if(direction.x > 0)     // Right
         {
-            _root.localScale = new Vector3(1, 1, 1);
+            _root.rotation = Quaternion.Euler(0, 0, 0);
         }
         else if(direction.x < 0)              // Left
         {
-            _root.localScale = new Vector3(-1, 1, 1);
+            _root.rotation = Quaternion.Euler(0, 180, 0);
         }
 
     }
