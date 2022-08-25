@@ -12,6 +12,9 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] float _speed;
     [SerializeField] float _movingThreshold;
 
+    [SerializeField] Rigidbody2D _rb;
+    [SerializeField] float _jumpForce;
+
     [SerializeField] Animator _animator;
 
     Vector2 _playerMovement;
@@ -32,7 +35,17 @@ public class PlayerMovement : MonoBehaviour
         _moveInput.action.started += StartMove;
         _moveInput.action.performed += UpdateMove;
         _moveInput.action.canceled += EndMove;
+
+        _jumpInput.action.started += StartJump;
     }
+
+    private void StartJump(InputAction.CallbackContext obj)
+    {
+        Debug.Log("COUCOU");
+
+        _rb.AddForce(new Vector2(0, _jumpForce));
+    }
+
     void FixedUpdate()
     {
         // Movement
@@ -40,7 +53,7 @@ public class PlayerMovement : MonoBehaviour
        _root.transform.Translate(direction * Time.fixedDeltaTime * _speed, Space.World);
 
         // Animator
-        Debug.Log($"Magnitude : {direction.magnitude}");
+        //Debug.Log($"Magnitude : {direction.magnitude}");
         if(direction.magnitude > _movingThreshold)        // Si on est en train de bouger
         {
             _animator.SetBool("IsWalking", true);
