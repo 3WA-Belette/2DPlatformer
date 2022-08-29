@@ -89,12 +89,10 @@ public class PlayerMovement : MonoBehaviour
         RaycastHit2D hit = Physics2D.Raycast(_footPoint.position, Vector2.down, _raycastLength, raycastLayerMask);
         if(hit.collider != null)
         {
-            Debug.Log("J'ai TOUCHÉ QUELQU'UN");
             _isGrounded = true;
         }
         else
         {
-            Debug.Log("J'ai rencontré PERSONNE");
             _isGrounded = false;
         }
 
