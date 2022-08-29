@@ -5,19 +5,28 @@ using UnityEngine.InputSystem;
 
 public class PlayerMovement : MonoBehaviour
 {
+    [Header("Input")]
     [SerializeField] InputActionReference _moveInput;
     [SerializeField] InputActionReference _jumpInput;
 
+    [Header("Movement")]
     [SerializeField] Transform _root;
     [SerializeField] float _speed;
     [SerializeField] float _movingThreshold;
 
+    [Header("Jump")]
     [SerializeField] Rigidbody2D _rb;
     [SerializeField] float _jumpForce;
 
+    [Header("Animator")]
     [SerializeField] Animator _animator;
 
+    [Header("IsGrounded")]
+    [SerializeField] Transform _footPoint;
+    [SerializeField] float _raycastLength;
+
     Vector2 _playerMovement;
+    bool _isGrounded;
 
 #if UNITY_EDITOR
     private void Reset()
@@ -41,9 +50,10 @@ public class PlayerMovement : MonoBehaviour
 
     private void StartJump(InputAction.CallbackContext obj)
     {
-        Debug.Log("COUCOU");
-
-        _rb.AddForce(new Vector2(0, _jumpForce));
+        if(_isGrounded)
+        {
+            _rb.AddForce(new Vector2(0, _jumpForce));
+        }
     }
 
     void FixedUpdate()
@@ -71,6 +81,21 @@ public class PlayerMovement : MonoBehaviour
         else if(direction.x < 0)              // Left
         {
             _root.rotation = Quaternion.Euler(0, 180, 0);
+        }
+
+        // Is Grounded
+        Debug.DrawRay(_footPoint.position, Vector2.down * _raycastLength, Color.red, 1f);
+        int raycastLayerMask = LayerMask.GetMask("Ground");
+        RaycastHit2D hit = Physics2D.Raycast(_footPoint.position, Vector2.down, _raycastLength, raycastLayerMask);
+        if(hit.collider != null)
+        {
+            Debug.Log("J'ai TOUCHÉ QUELQU'UN");
+            _isGrounded = true;
+        }
+        else
+        {
+            Debug.Log("J'ai rencontré PERSONNE");
+            _isGrounded = false;
         }
 
     }
