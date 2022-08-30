@@ -4,7 +4,15 @@ using UnityEngine;
 
 public class Ale : MonoBehaviour
 {
+    [SerializeField] int _scoreValue;
+
     Score _score;
+
+    private void Reset()
+    {
+        _scoreValue = 10;
+    }
+
     void Start()
     {
         _score = GameObject.FindObjectOfType<Score>();
@@ -23,7 +31,7 @@ public class Ale : MonoBehaviour
             Debug.Log("UN JOUEUR AGAIN !");
             GameObject.Destroy(gameObject);
 
-            _score.AddScore();
+            _score.AddScore(_scoreValue);
         }
     }
 }

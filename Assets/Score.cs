@@ -9,11 +9,11 @@ public class Score : MonoBehaviour
 
     int _score;
 
-    public void AddScore()
+    public void AddScore(int scoreToAdd)
     {
         Debug.Log("YOUPI J'ai gagné des points");
 
-        _score++;
+        _score += scoreToAdd;
         _text.text = _score.ToString();
     }
 
