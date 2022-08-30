@@ -84,7 +84,7 @@ public class PlayerMovement : MonoBehaviour
         }
 
         // Is Grounded
-        Debug.DrawRay(_footPoint.position, Vector2.down * _raycastLength, Color.red, 1f);
+        //Debug.DrawRay(_footPoint.position, Vector2.down * _raycastLength, Color.red, 1f);
         int raycastLayerMask = LayerMask.GetMask("Ground");
         RaycastHit2D hit = Physics2D.Raycast(_footPoint.position, Vector2.down, _raycastLength, raycastLayerMask);
         if(hit.collider != null)
