@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class PlateformTag : MonoBehaviour
@@ -18,6 +19,7 @@ public class PlateformTag : MonoBehaviour
         _rb.gravityScale = 0;
         _rb.velocity = Vector3.zero;
         transform.position = _startPosition;
+
     }
 
 }
