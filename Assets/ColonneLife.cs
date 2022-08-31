@@ -11,6 +11,9 @@ public class ColonneLife : MonoBehaviour
     [SerializeField] UnityEvent _onAttack;
     [SerializeField] UnityEvent _onDie;
 
+    [SerializeField] AnimationCurve _animCurve;
+
+
     void OnTriggerEnter2D(Collider2D collision)
     {
         _hp--;
@@ -21,6 +24,10 @@ public class ColonneLife : MonoBehaviour
         {
             _onDie.Invoke();
         }
+
+
+        _animCurve.Evaluate(2f);
+
     }
 
 }

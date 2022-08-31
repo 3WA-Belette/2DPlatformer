@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 13312, guid: 0000000000000000e000000000000000, type: 0}
   m_Name: dungeon_floor_tile_0
   m_EditorClassIdentifier: 
-  m_Sprite: {fileID: -119059394, guid: f53ec9b926fa8cf4ea19a76b7c5fd1f4, type: 3}
+  m_Sprite: {fileID: 21300000, guid: c7e497d9b24cce04ab9604bbd3f7faeb, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_Transform:
     e00: 1

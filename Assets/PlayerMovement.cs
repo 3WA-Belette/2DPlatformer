@@ -17,6 +17,7 @@ public class PlayerMovement : MonoBehaviour
     [Header("Jump")]
     [SerializeField] Rigidbody2D _rb;
     [SerializeField] float _jumpForce;
+    [SerializeField] int _jumpCountLimit;
 
     [Header("Animator")]
     [SerializeField] Animator _animator;
@@ -25,8 +26,17 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] Transform _footPoint;
     [SerializeField] float _raycastLength;
 
+    [SerializeField] bool _isDoubleJumpAllowed;
+
+
+    public void AllowDouble()
+    {
+        _isDoubleJumpAllowed = true;
+    }
+
     Vector2 _playerMovement;
     bool _isGrounded;
+    int _jumpCount;
 
 #if UNITY_EDITOR
     private void Reset()
@@ -50,10 +60,16 @@ public class PlayerMovement : MonoBehaviour
 
     private void StartJump(InputAction.CallbackContext obj)
     {
-        if(_isGrounded)
-        {
-            _rb.AddForce(new Vector2(0, _jumpForce));
-        }
+        if (_isGrounded) _jumpCount = 0;
+        if (_jumpCount >= _jumpCountLimit) return;
+
+        _jumpCount++;
+        _rb.AddForce(new Vector2(0, _jumpForce));
+
+
+        PlayerPrefs.SetInt("Score", 100);
+
+        int myScore = PlayerPrefs.GetInt("Score");
     }
 
     void FixedUpdate()
