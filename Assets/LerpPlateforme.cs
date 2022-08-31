@@ -10,48 +10,38 @@ public class LerpPlateforme : MonoBehaviour
     //[SerializeField, Range(0, 1)] float t;
 
     Vector3 _initialPosition;
-    float _initialTime;
-    float _destinationTime;
-    float _currentTime;
+    float _currentMovement;
     bool _isReturn;
 
     private void Start()
     {
         _initialPosition = transform.position;
-        _initialTime = Time.time;
-        _destinationTime = _initialTime + _movementDuration;
         _isReturn = false;
+        _currentMovement = 0;
     }
 
     private void Update()
     {
-        _currentTime = Time.time;
-        float t = (_currentTime - _initialTime) / _movementDuration;
+        // On rempli progressivement notre "sablier"
+        _currentMovement += Time.deltaTime;
+
+        // Dès que l'on dépasse la durée visée : on change de mode et on vide notre sablier
+        if(_currentMovement >= _movementDuration)
+        {
+            _isReturn = !_isReturn;
+            _currentMovement = 0;
+        }
+        // Progression du sablier (entre 0 et 1)
+        float t = _currentMovement / _movementDuration;
 
         // ALLER
-        if(_isReturn == false)
+        if (_isReturn == false)
         {
             transform.position = Vector3.Lerp(_initialPosition, _destinationPosition, t);
         }
         else   // RETOUR
         {
             transform.position = Vector3.Lerp(_destinationPosition, _initialPosition, t);
-        }
-        // On a fini le mouvement
-        if (_currentTime > _destinationTime)
-        {
-            Debug.Log("AH J'AI FINI");
-            if (_isReturn)
-            {
-                _isReturn = false;
-            }
-            else
-            {
-                _isReturn = true;
-            }
-            // _isReturn = !_isReturn;
-            _initialTime = Time.time;
-            _destinationTime = _initialTime + _movementDuration;
         }
 
     }
